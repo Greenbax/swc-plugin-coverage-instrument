@@ -21,7 +21,7 @@ use swc_core::{
     },
     ecma::{
         transforms::base::pass::noop,
-        visit::{as_folder, Fold},
+        visit::{visit_mut_pass, Pass},
     },
 };
 use swc_coverage_instrument::{create_coverage_instrumentation_visitor, InstrumentOptions};
@@ -131,9 +131,9 @@ fn coverage_instrument<
     comments: C,
     instrument_options: InstrumentOptions,
     filename: String,
-) -> impl Fold + 'a {
+) -> impl Pass + 'a {
     let visitor =
         create_coverage_instrumentation_visitor(source_map, comments, instrument_options, filename);
 
-    as_folder(visitor)
+    visit_mut_pass(visitor)
 }

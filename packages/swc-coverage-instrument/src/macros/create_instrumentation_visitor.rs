@@ -10,6 +10,7 @@ macro_rules! create_instrumentation_visitor {
         use swc_core::{common::{Span, Spanned}, ecma::ast::*};
 
         // Declare a struct, expand fields commonly used for any instrumentation visitor.
+        #[allow(dead_code)]
         pub struct $name<C: Clone + swc_core::common::comments::Comments, S: swc_core::common::SourceMapper> {
             // We may not need Arc in the plugin context - this is only to preserve isomorphic interface
             // between plugin & custom transform pass.
